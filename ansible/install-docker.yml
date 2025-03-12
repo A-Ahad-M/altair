@@ -1,0 +1,14 @@
+- name: Install Docker and Deploy Angular App
+  hosts: angular_vm
+  become: yes
+  tasks:
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Pull Angular Docker Image
+      command: docker pull ghcr.io/A-Ahad-M/altair/angular-app:latest
+
+    - name: Run Angular Container
+      command: docker run -d -p 80:80 ghcr.io/A-Ahad-M/altair/angular-app:latest
